@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Model Counter: AI models fitted to your spec</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Sofia+Sans+Extra+Condensed:wght@600;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F7F2;
+    --ink:#1B2A55;
+    --blue:#1D3F8F;
+    --tint:#DCE3F2;
+    --tint2:#EDF0F7;
+    --yellow:#FFCC1A;
+    --yellow-deep:#E5B000;
+    --muted:#4D5B80;
+    --focus:#D23B00;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Sofia Sans",system-ui,sans-serif;font-size:17px;line-height:1.5}
+  a{color:var(--blue);text-decoration-thickness:1px;text-underline-offset:3px}
+  :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+  .cond{font-family:"Sofia Sans Extra Condensed","Sofia Sans",sans-serif}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+
+  /* ---------- masthead: pegboard ---------- */
+  .mast{
+    background-color:var(--yellow);
+    background-image:radial-gradient(circle,rgba(27,42,85,.22) 0 2.6px,transparent 3.2px);
+    background-size:24px 24px;background-position:12px 12px;
+    border-bottom:6px solid var(--blue);
+  }
+  .mast .wrap{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px;padding-top:34px;padding-bottom:26px}
+  .mast h1{
+    margin:0;font-family:"Sofia Sans Extra Condensed",sans-serif;font-weight:900;
+    font-size:clamp(58px,10vw,128px);line-height:.8;color:var(--blue);letter-spacing:-.01em;
+    background:var(--yellow);padding:6px 10px 0 0;
+  }
+  .mast .edition{background:var(--paper);padding:12px 16px;max-width:400px;font-size:16px;border:2px solid var(--blue);border-radius:4px}
+  .mast .edition strong{display:block;font-size:18px}
+
+  .intro{padding:26px 0 8px;max-width:68ch;font-size:18px}
+  .intro p{margin:0}
+
+  /* ---------- main layout ---------- */
+  .main{display:grid;grid-template-columns:430px minmax(0,1fr);gap:48px;align-items:start;padding:24px 0 40px}
+
+  /* spec form */
+  .spec{position:sticky;top:16px;border:2px solid var(--blue);border-radius:6px;background:#fff;padding:20px 20px 16px}
+  .spec h2,.listing h2{font-family:"Sofia Sans Extra Condensed",sans-serif;font-weight:800;font-size:34px;line-height:1;margin:0 0 6px;color:var(--blue)}
+  .spec .how{margin:0 0 14px;font-size:15px;color:var(--muted)}
+  .jobs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+  .jobs span{width:100%;font-size:14px;color:var(--muted)}
+  .job{font:inherit;font-size:14.5px;font-weight:700;color:var(--blue);background:var(--tint2);border:1.5px solid var(--blue);border-radius:999px;padding:3px 11px;cursor:pointer}
+  .job:hover{background:var(--tint)}
+  .job[aria-pressed="true"]{background:var(--blue);color:#fff}
+
+  fieldset.row{border:0;margin:0;padding:10px 0 9px;border-top:1.5px dashed rgba(29,63,143,.35);display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:end}
+  fieldset.row legend{float:left;padding:0;font-weight:800;font-size:17px;line-height:1.2}
+  .row .hint{grid-column:1;font-size:13.5px;color:var(--muted);line-height:1.25}
+  .row .val{grid-column:2;grid-row:1 / span 2;font-family:"Sofia Sans Extra Condensed",sans-serif;font-weight:900;font-size:40px;line-height:.85;color:var(--blue);min-width:1.4ch;text-align:right;font-variant-numeric:tabular-nums}
+  .gauge{grid-column:1 / -1;display:grid;grid-template-columns:repeat(11,1fr);gap:2px;margin-top:7px}
+  .gauge input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+  .gauge label{display:block;height:26px;cursor:pointer;background:var(--tint2);border:1px solid rgba(29,63,143,.3);font-size:11px;line-height:24px;text-align:center;color:var(--muted);font-variant-numeric:tabular-nums;user-select:none}
+  .gauge label:first-of-type{border-radius:3px 0 0 3px}
+  .gauge label:last-of-type{border-radius:0 3px 3px 0}
+  .gauge label.on{background:var(--blue);border-color:var(--blue);color:rgba(255,255,255,.75)}
+  .gauge label.at{background:var(--yellow);border-color:var(--blue);color:var(--ink);font-weight:800}
+  .gauge input:focus-visible + label{outline:3px solid var(--focus);outline-offset:1px;position:relative;z-index:1}
+  .gauge label:hover{border-color:var(--blue)}
+  .spec .scale{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:8px}
+
+  /* listing */
+  .listing .lead{margin:0 0 18px;color:var(--muted);font-size:16px;max-width:60ch}
+  .legend{display:flex;gap:16px;align-items:center;font-size:14px;color:var(--muted);margin:0 0 14px;max-width:70ch}
+  .legend svg{flex:none}
+
+  ol.items{list-style:none;margin:0;padding:0}
+  .item{position:relative;background:#fff;border:2px solid var(--blue);border-radius:6px;margin-bottom:12px}
+  .item-head{display:grid;grid-template-columns:70px minmax(0,1fr) auto;gap:4px 18px;padding:16px 18px 12px 14px;align-items:start}
+  .no{font-family:"Sofia Sans Extra Condensed",sans-serif;font-weight:900;font-size:50px;line-height:.8;color:var(--blue);text-align:center;font-variant-numeric:tabular-nums}
+  .no small{display:block;font-size:14px;font-weight:600;color:var(--muted);line-height:1.2;margin-top:2px}
+  .title{font-size:22px;font-weight:800;line-height:1.15;margin:2px 0 1px}
+  .maker{font-size:15px;color:var(--muted)}
+
+  /* shelf tag */
+  .tag{
+    position:relative;background:var(--yellow);border:2px solid var(--blue);border-radius:4px 4px 4px 4px;
+    padding:6px 14px 6px 22px;text-align:right;min-width:112px;
+  }
+  .tag::before{content:"";position:absolute;left:8px;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--paper);border:1.5px solid var(--blue)}
+  .tag b{display:block;font-family:"Sofia Sans Extra Condensed",sans-serif;font-weight:900;font-size:40px;line-height:.9;color:var(--blue);font-variant-numeric:tabular-nums}
+  .tag span{font-size:12.5px;font-weight:700;color:var(--ink);white-space:nowrap}
+
+  .strip{grid-column:2 / -1;display:flex;height:38px;border-bottom:2px solid var(--blue);margin-top:10px;gap:0}
+  .strip div{position:relative;height:100%;background:var(--tint2);overflow:hidden;transition:flex-grow .35s ease;flex:0 1 0;min-width:0;border-left:1px solid #fff}
+  .strip div:first-child{border-left:0}
+  .strip i{position:absolute;left:0;right:0;bottom:0;background:var(--blue)}
+  .strip-key{grid-column:2 / -1;display:flex;font-size:11.5px;color:var(--muted);line-height:1.2;margin-top:3px}
+  .strip-key span{flex:0 1 0;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:clip;padding-left:2px;transition:flex-grow .35s ease}
+
+  .blurb{grid-column:2 / -1;margin:10px 0 0;font-size:16px;max-width:64ch}
+  .why{grid-column:2 / -1;margin:10px 0 0;padding:8px 12px;background:var(--tint2);border-left:4px solid var(--yellow-deep);font-size:16px;max-width:64ch}
+
+  .toggle{grid-column:2 / -1;justify-self:start;margin-top:8px;font:inherit;font-size:15px;font-weight:700;color:var(--blue);background:none;border:0;padding:4px 0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+  .sheet{display:none;border-top:2px solid var(--blue);padding:16px 18px 18px 102px;background:var(--tint2);border-radius:0 0 4px 4px}
+  .item[data-open="true"] .sheet{display:block}
+  .sheet h3{margin:0 0 6px;font-size:16px;font-weight:800}
+  .sheet table{border-collapse:collapse;width:100%;max-width:560px;font-size:15px;margin:0 0 16px}
+  .sheet td,.sheet th{text-align:left;padding:4px 10px 4px 0;border-bottom:1px solid rgba(29,63,143,.2);vertical-align:top}
+  .sheet th{font-weight:700}
+  .sheet td.n{font-weight:800;font-variant-numeric:tabular-nums;width:3ch}
+  .sheet td.bar{width:45%}
+  .sheet td.bar i{display:block;height:8px;background:var(--blue);margin-top:7px}
+  .sheet ul{margin:0 0 14px;padding-left:18px;max-width:66ch;font-size:15.5px}
+  .sheet li{margin-bottom:4px}
+  .src{font-size:13px;font-weight:700;color:var(--blue);text-decoration:none;border:1px solid var(--blue);border-radius:3px;padding:0 4px;margin-left:4px;white-space:nowrap}
+  .src:hover{background:var(--yellow)}
+  .sheet dl{display:grid;grid-template-columns:auto 1fr;gap:3px 16px;margin:0;font-size:15px;max-width:66ch}
+  .sheet dt{color:var(--muted)}
+  .sheet dd{margin:0}
+
+  .item.first{border-width:3px;box-shadow:6px 6px 0 var(--yellow)}
+  .item.first .title{font-size:28px}
+  .item.first .no{font-size:72px}
+  .item.first .tag b{font-size:54px}
+  .item.first .strip{height:56px}
+
+  .empty{border:2px dashed var(--blue);border-radius:6px;padding:28px;font-size:18px;max-width:52ch}
+
+  /* ---------- sources ---------- */
+  .sources{border-top:6px solid var(--blue);padding:36px 0 70px}
+  .sources h2{font-family:"Sofia Sans Extra Condensed",sans-serif;font-weight:900;font-size:52px;line-height:.95;margin:0 0 12px;color:var(--blue)}
+  .sources h3{font-size:22px;font-weight:800;margin:34px 0 10px}
+  .sources > .wrap > p{max-width:70ch;margin:0 0 12px}
+  .basis{border-collapse:collapse;width:100%;font-size:15.5px;background:#fff;border:2px solid var(--blue)}
+  .basis th,.basis td{text-align:left;padding:9px 12px;border-bottom:1px solid rgba(29,63,143,.25);vertical-align:top}
+  .basis thead th{background:var(--blue);color:#fff;font-weight:700}
+  .conf{display:inline-flex;gap:3px;vertical-align:middle;margin-right:6px}
+  .conf i{width:10px;height:10px;border:1.5px solid var(--blue);border-radius:2px}
+  .conf i.f{background:var(--blue)}
+  .srclist{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+  .srclist li{background:#fff;border:2px solid var(--blue);border-radius:6px;padding:14px 16px;scroll-margin-top:20px}
+  .srclist li:target{box-shadow:6px 6px 0 var(--yellow)}
+  .srclist h4{margin:0 0 4px;font-size:18px;font-weight:800}
+  .srclist .code{display:inline-block;font-size:13px;font-weight:700;background:var(--yellow);border:1px solid var(--blue);border-radius:3px;padding:0 5px;margin-right:6px;vertical-align:2px}
+  .srclist p{margin:0 0 8px;font-size:15.5px}
+  .srclist dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:14.5px;margin:0 0 8px}
+  .srclist dt{color:var(--muted)}
+  .srclist dd{margin:0}
+  .sources > .wrap > p.fine{font-size:14.5px;color:var(--muted);max-width:76ch;margin-top:28px}
+
+  /* mobile best-fit bar */
+  .bestbar{display:none}
+  @media (max-width:980px){
+    .main{grid-template-columns:1fr;gap:34px}
+    .spec{position:static}
+    .bestbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:5;align-items:center;justify-content:space-between;gap:12px;background:var(--blue);color:#fff;padding:10px 16px calc(10px + env(safe-area-inset-bottom));font-size:15px}
+    .bestbar b{color:var(--yellow)}
+    .bestbar a{color:#fff;font-weight:700;white-space:nowrap}
+    body{padding-bottom:56px}
+  }
+  @media (max-width:620px){
+    body{font-size:16px}
+    .wrap{padding:0 14px}
+    .item-head{grid-template-columns:44px minmax(0,1fr);padding:14px 12px 12px 8px;gap:4px 10px}
+    .no{font-size:38px}
+    .item.first .no{font-size:48px}
+    .tag{grid-column:2;justify-self:start;margin-top:6px;text-align:left}
+    .item.first .tag b{font-size:44px}
+    .sheet{padding:14px 12px 16px}
+    .srclist{grid-template-columns:1fr}
+    .basis{font-size:14.5px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="mast">
+  <div class="wrap">
+    <h1>The Model Counter</h1>
+    <div class="edition" id="edition"><strong>Catalogue</strong>Loading the latest stock list.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="intro"><p>Tell us what the job needs, and we'll pull the models that fit it best off the shelf. Rate each requirement from 0 (don't care) to 10 (must have). Every score in the catalogue links to the measurement behind it.</p></div>
+
+  <div class="main">
+    <form class="spec" id="spec" aria-labelledby="spec-title" onsubmit="return false">
+      <h2 id="spec-title">Your spec</h2>
+      <p class="how">Pick a common job to start, then adjust any line.</p>
+      <div class="jobs" role="group" aria-label="Common jobs">
+        <span>Common jobs:</span>
+        <button type="button" class="job" data-job="flat">Everything equal</button>
+        <button type="button" class="job" data-job="dev">Building software</button>
+        <button type="button" class="job" data-job="writer">Writing</button>
+        <button type="button" class="job" data-job="research">Research</button>
+        <button type="button" class="job" data-job="budget">Tight budget</button>
+        <button type="button" class="job" data-job="volume">Lots of quick jobs</button>
+        <button type="button" class="job" data-job="private">Keep data in-house</button>
+      </div>
+      <div id="rows"></div>
+      <div class="scale"><span>0 = don't care</span><span>10 = must have</span></div>
+    </form>
+
+    <section class="listing" id="listing" aria-labelledby="listing-title">
+      <h2 id="listing-title">Best fit for your spec</h2>
+      <p class="lead" id="lead"></p>
+      <div class="legend" aria-hidden="true">
+        <svg width="90" height="30" viewBox="0 0 90 30"><rect x="0" y="0" width="18" height="28" fill="#EDF0F7"/><rect x="0" y="10" width="18" height="18" fill="#1D3F8F"/><rect x="19" y="0" width="44" height="28" fill="#EDF0F7"/><rect x="19" y="4" width="44" height="24" fill="#1D3F8F"/><rect x="64" y="0" width="26" height="28" fill="#EDF0F7"/><rect x="64" y="16" width="26" height="12" fill="#1D3F8F"/><rect x="0" y="28" width="90" height="2" fill="#1D3F8F"/></svg>
+        <span>Each column is one requirement. Wider columns are ones you care more about; the blue fill is how well the model scores. More blue means a better fit.</span>
+      </div>
+      <div class="empty" id="empty" hidden>Every requirement is set to 0, so there's nothing to fit. Raise at least one line in your spec.</div>
+      <ol class="items" id="items"></ol>
+    </section>
+  </div>
+</div>
+
+<section class="sources" id="sources" aria-labelledby="sources-title">
+  <div class="wrap">
+    <h2 id="sources-title">Where the numbers come from</h2>
+    <p>No single leaderboard measures everything people care about, so each requirement is scored from the benchmarks that best measure it. Those measurements are turned into a 0–10 rating by hand, and that step is a judgment call. The ratings show how the models compare with each other, not how good they are in absolute terms.</p>
+    <p>Your fit score is a weighted average: each model's rating on a requirement, times how much you care about it, added up and divided by the total of your weights, then scaled to 100.</p>
+
+    <h3>How each requirement is rated</h3>
+    <div style="overflow-x:auto">
+    <table class="basis">
+      <thead><tr><th scope="col">Requirement</th><th scope="col">What the rating is based on</th><th scope="col">How much to trust it</th></tr></thead>
+      <tbody id="basis"></tbody>
+    </table>
+    </div>
+
+    <h3>Sources</h3>
+    <ul class="srclist" id="srclist"></ul>
+
+    <p class="fine">This site updates itself weekly; see the <a href="https://github.com/OWNER/REPO/blob/main/CHANGELOG.md">change log</a> for what changed and when. Benchmarks move quickly. Most of these leaderboards change within weeks, scores differ depending on how hard a model is told to think (its “effort” setting), and makers sometimes publish their own numbers before anyone checks them. Prices are API rates in US dollars per million input and output tokens; subscription apps such as ChatGPT, Claude and Gemini charge a monthly fee instead. Check the maker's own pricing page before you commit.</p>
+  </div>
+</section>
+
+<div class="bestbar" id="bestbar" aria-live="polite"><span id="bestbar-text"></span><a href="#listing">See the list</a></div>
+
+<script>
+/* ---------------- data ---------------- */
+const CATS = [
+  {id:"coding",   label:"Coding",      short:"Code",   hint:"Writing, fixing and reviewing code"},
+  {id:"writing",  label:"Writing",     short:"Write",  hint:"Prose that people prefer to read"},
+  {id:"reasoning",label:"Reasoning",   short:"Reason", hint:"Hard problems, maths, analysis"},
+  {id:"speed",    label:"Speed",       short:"Speed",  hint:"How quickly answers come back"},
+  {id:"value",    label:"Value",       short:"Value",  hint:"Quality you get per dollar spent"},
+  {id:"agents",   label:"Long tasks",  short:"Long",   hint:"Working alone through many steps"},
+  {id:"longdocs", label:"Big documents",short:"Docs",  hint:"Taking in huge files at once"},
+  {id:"media",    label:"Images & media",short:"Media",hint:"Understanding pictures, charts and video"},
+  {id:"selfhost", label:"Run it yourself",short:"Own",  hint:"Download it and run it on your own servers"},
+];
+
+let SOURCES={}, MODELS=[], BASIS=[];
+
+const JOBS = {
+  flat:    {coding:5,writing:5,reasoning:5,speed:5,value:5,agents:5,longdocs:5,media:5,selfhost:5},
+  dev:     {coding:10,writing:2,reasoning:7,speed:5,value:5,agents:8,longdocs:6,media:1,selfhost:0},
+  writer:  {coding:0,writing:10,reasoning:5,speed:4,value:5,agents:2,longdocs:6,media:2,selfhost:0},
+  research:{coding:2,writing:6,reasoning:10,speed:2,value:4,agents:6,longdocs:9,media:5,selfhost:0},
+  budget:  {coding:5,writing:5,reasoning:5,speed:5,value:10,agents:3,longdocs:3,media:3,selfhost:1},
+  volume:  {coding:3,writing:4,reasoning:3,speed:10,value:9,agents:1,longdocs:4,media:3,selfhost:0},
+  private: {coding:6,writing:5,reasoning:6,speed:3,value:5,agents:5,longdocs:5,media:1,selfhost:10},
+};
+
+const weights = {...JOBS.flat};
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const catLabel = id => CATS.find(c=>c.id===id).label;
+
+function seasonOf(d){const m=d.getMonth();return m<2||m===11?"Winter":m<5?"Spring":m<8?"Summer":"Fall"}
+async function init(){
+  let data;
+  try{
+    const res = await fetch("models.json",{cache:"no-cache"});
+    if(!res.ok) throw new Error(res.status);
+    data = await res.json();
+  }catch(e){
+    document.getElementById("lead").textContent = "The catalogue data didn't load. Refresh the page to try again.";
+    return;
+  }
+  SOURCES = data.sources; MODELS = data.models; BASIS = data.basis;
+  const d = new Date(data.lastChecked+"T12:00:00");
+  const nice = d.toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  document.getElementById("edition").innerHTML = `<strong>${seasonOf(d)} ${d.getFullYear()} catalogue</strong>${MODELS.length} AI models in stock. Benchmarks and prices checked ${nice}.`;
+/* ---------------- spec form ---------------- */
+const rowsEl = document.getElementById("rows");
+CATS.forEach(c=>{
+  const fs = document.createElement("fieldset");
+  fs.className = "row";
+  fs.innerHTML = `<legend>${c.label}</legend>
+    <span class="val" aria-hidden="true"></span>
+    <span class="hint">${c.hint}</span>
+    <div class="gauge">${Array.from({length:11},(_,v)=>
+      `<input type="radio" name="${c.id}" id="${c.id}-${v}" value="${v}"><label for="${c.id}-${v}" aria-label="${v}">${v}</label>`).join("")}</div>`;
+  rowsEl.appendChild(fs);
+  fs.querySelectorAll("input").forEach(inp=>inp.addEventListener("change",()=>{
+    weights[c.id] = +inp.value; paintRow(c.id); clearJobs(); render();
+  }));
+});
+function paintRow(id){
+  const v = weights[id];
+  document.getElementById(`${id}-${v}`).checked = true;
+  document.querySelectorAll(`.gauge input[name="${id}"] + label`).forEach((l,i)=>{
+    l.classList.toggle("on", i<v); l.classList.toggle("at", i===v);
+  });
+  document.getElementById(`${id}-0`).closest("fieldset").querySelector(".val").textContent = v;
+}
+function clearJobs(){document.querySelectorAll(".job").forEach(b=>b.setAttribute("aria-pressed","false"))}
+document.querySelectorAll(".job").forEach(b=>{
+  b.setAttribute("aria-pressed", b.dataset.job==="flat");
+  b.addEventListener("click",()=>{
+    Object.assign(weights, JOBS[b.dataset.job]);
+    CATS.forEach(c=>paintRow(c.id));
+    document.querySelectorAll(".job").forEach(x=>x.setAttribute("aria-pressed", x===b));
+    render();
+  });
+});
+
+/* ---------------- listing ---------------- */
+const list = document.getElementById("items");
+const items = new Map();
+const srcLink = k => (k && SOURCES[k]) ? `<a class="src" href="#src-${k}" title="${SOURCES[k].name}">${shortName(k)}</a>` : "";
+function shortName(k){return {AA:"Artificial Analysis",ARENA:"LMArena",TB:"Terminal-Bench",APEX:"Mercor APEX",GDP:"GDPval-AA",BLM:"BenchLM",PRICE:"IntuitionLabs",GEO:"GEO Toolbox"}[k]}
+
+MODELS.forEach((m,idx)=>{
+  const li = document.createElement("li");
+  li.className = "item"; li.dataset.open = "false";
+  const sid = "sheet-"+idx;
+  li.innerHTML = `
+    <div class="item-head">
+      <div class="no" aria-hidden="true"><span class="n"></span><small>No.</small></div>
+      <div>
+        <h3 class="title">${m.name}</h3>
+        <div class="maker">Made by ${m.maker}. ${m.price.startsWith("$") ? m.price+" per million tokens." : m.price+"."}</div>
+      </div>
+      <div class="tag"><b class="fit"></b><span>fit out of 100</span></div>
+      <div class="strip" aria-hidden="true">${CATS.map(c=>`<div data-c="${c.id}"><i style="height:${m.s[c.id]*10}%"></i></div>`).join("")}</div>
+      <div class="strip-key" aria-hidden="true">${CATS.map(c=>`<span data-c="${c.id}">${c.short}</span>`).join("")}</div>
+      <p class="blurb">${m.blurb}</p>
+      <p class="why" hidden></p>
+      <button type="button" class="toggle" aria-expanded="false" aria-controls="${sid}">Show spec sheet and sources</button>
+    </div>
+    <div class="sheet" id="${sid}">
+      <h3>Ratings</h3>
+      <table><tbody>${CATS.map(c=>`<tr><th scope="row">${c.label}</th><td class="n">${m.s[c.id]}</td><td class="bar"><i style="width:${m.s[c.id]*10}%"></i></td></tr>`).join("")}</tbody></table>
+      <h3>What the ratings are based on</h3>
+      <ul>${m.ev.map(({text:t,source:k})=>`<li>${t}${srcLink(k)}</li>`).join("")}</ul>
+      <h3>Buying details</h3>
+      <dl><dt>API price</dt><dd>${m.price} per million tokens, input / output</dd>
+          <dt>Context</dt><dd>${m.ctx}</dd>
+          <dt>Where to use it</dt><dd>${m.access}</dd></dl>
+    </div>`;
+  const btn = li.querySelector(".toggle");
+  btn.addEventListener("click",()=>{
+    const o = li.dataset.open!=="true";
+    li.dataset.open = o; btn.setAttribute("aria-expanded",o);
+    btn.textContent = o ? "Hide spec sheet" : "Show spec sheet and sources";
+  });
+  items.set(m.name, li);
+  list.appendChild(li);
+});
+
+function fit(m){
+  const total = CATS.reduce((a,c)=>a+weights[c.id],0);
+  return total ? CATS.reduce((a,c)=>a+weights[c.id]*m.s[c.id],0)/total*10 : 0;
+}
+function why(m){
+  const active = CATS.filter(c=>weights[c.id]>0);
+  const top = [...active].sort((a,b)=>weights[b.id]*m.s[b.id]-weights[a.id]*m.s[a.id]).slice(0,2);
+  const weak = active.filter(c=>weights[c.id]>=6 && m.s[c.id]<=5).sort((a,b)=>weights[b.id]-weights[a.id])[0];
+  let t = `Why it fits: ${top.map(c=>`${c.label.toLowerCase()} (rated ${m.s[c.id]})`).join(" and ")} carry most of the score.`;
+  if(weak) t += ` Watch out for ${weak.label.toLowerCase()}, where it's rated ${m.s[weak.id]}.`;
+  return t;
+}
+
+function render(){
+  const total = CATS.reduce((a,c)=>a+weights[c.id],0);
+  document.getElementById("empty").hidden = total>0;
+  list.hidden = total===0;
+  const lead = document.getElementById("lead"), bar = document.getElementById("bestbar-text");
+  if(!total){lead.textContent=""; bar.textContent="Raise a line in your spec"; return;}
+
+  const ranked = MODELS.map(m=>({m,f:fit(m)})).sort((a,b)=>b.f-a.f || a.m.name.localeCompare(b.m.name));
+  const [a,b] = ranked, gap = a.f-b.f;
+  lead.textContent = gap < 1.5
+    ? `${a.m.name} and ${b.m.name} are nearly tied for this spec. Try both before you choose.`
+    : `${a.m.name} fits this spec best, ${Math.round(gap)} points ahead of ${b.m.name}.`;
+  bar.innerHTML = `Best fit: <b>${a.m.name}</b>, ${Math.round(a.f)}`;
+
+  const first = new Map();
+  if(!reduceMotion) items.forEach((li,k)=>first.set(k,li.getBoundingClientRect().top));
+
+  ranked.forEach((r,i)=>{
+    const li = items.get(r.m.name);
+    li.classList.toggle("first", i===0);
+    li.querySelector(".n").textContent = i+1;
+    li.querySelector(".fit").textContent = Math.round(r.f);
+    li.setAttribute("aria-label", `Number ${i+1}: ${r.m.name}, fit ${Math.round(r.f)} out of 100`);
+    li.querySelectorAll(".strip div").forEach(d=>{
+      const c = d.dataset.c; d.style.flexGrow = weights[c];
+      d.title = `${catLabel(c)}: rated ${r.m.s[c]}; you set ${weights[c]}`;
+    });
+    li.querySelectorAll(".strip-key span").forEach(s=>{ const w = weights[s.dataset.c]; s.style.flexGrow = w; s.style.visibility = (w/total < .075) ? "hidden" : "visible"; });
+    const w = li.querySelector(".why");
+    w.hidden = i!==0; if(i===0) w.textContent = why(r.m);
+    list.appendChild(li);
+  });
+
+  if(!reduceMotion){
+    items.forEach((li,k)=>{
+      const dy = first.get(k) - li.getBoundingClientRect().top;
+      if(Math.abs(dy)<1) return;
+      li.style.transition="none"; li.style.transform=`translateY(${dy}px)`;
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{li.style.transition="transform .45s cubic-bezier(.2,.7,.2,1)"; li.style.transform="";}));
+    });
+  }
+}
+
+/* ---------------- sources section ---------------- */
+document.getElementById("basis").innerHTML = BASIS.map(({category:id,text:txt,trust:n})=>{
+  const words = ["","Low","Fair","Good","Strong"][n];
+  return `<tr><th scope="row">${catLabel(id)}</th><td>${txt}</td><td><span class="conf" aria-hidden="true">${[1,2,3,4].map(k=>`<i class="${k<=n?'f':''}"></i>`).join("")}</span>${words}</td></tr>`;
+}).join("");
+
+document.getElementById("srclist").innerHTML = Object.entries(SOURCES).map(([k,s])=>`
+  <li id="src-${k}">
+    <h4><a href="${s.url}">${s.name}</a></h4>
+    <p>${s.what}</p>
+    <dl><dt>Used for</dt><dd>${s.used}</dd><dt>Date</dt><dd>${s.when}</dd></dl>
+    <p><strong>Keep in mind:</strong> ${s.caveat}</p>
+  </li>`).join("");
+
+CATS.forEach(c=>paintRow(c.id));
+render();
+}
+init();
+</script>
+</body>
+</html>

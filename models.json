@@ -1,0 +1,607 @@
+{
+  "lastChecked": "2026-11-18",
+  "models": [
+    {
+      "name": "Claude Fable 5.2",
+      "maker": "Anthropic",
+      "price": "$8 / $40",
+      "ctx": "1M tokens",
+      "access": "Claude Max and above; Pro through usage credits; API",
+      "blurb": "The highest-scoring model available right now, and the most expensive to run per task.",
+      "s": {
+        "coding": 10,
+        "writing": 9,
+        "reasoning": 10,
+        "speed": 3,
+        "value": 3,
+        "agents": 10,
+        "longdocs": 9,
+        "media": 9,
+        "selfhost": 0
+      },
+      "ev": [
+        {
+          "text": "Intelligence Index 65 at max effort, the highest listed, at $26.54 per test task.",
+          "source": "AA"
+        },
+        {
+          "text": "First on BenchLM's overall, coding, reasoning, agentic and multimodal boards in November, though most of those rows are marked Estimated.",
+          "source": "BLM"
+        },
+        {
+          "text": "Terminal-Bench 65.8%, tied for first.",
+          "source": "TB"
+        },
+        {
+          "text": "GDPval-AA rating 1831 at max effort.",
+          "source": "GDP"
+        }
+      ]
+    },
+    {
+      "name": "Claude Opus 5.5",
+      "maker": "Anthropic",
+      "price": "$4 / $20",
+      "ctx": "1M tokens",
+      "access": "Claude Pro and above; API",
+      "blurb": "Leads the coding and professional-work boards. Thorough rather than quick.",
+      "s": {
+        "coding": 10,
+        "writing": 9,
+        "reasoning": 9,
+        "speed": 5,
+        "value": 5,
+        "agents": 10,
+        "longdocs": 9,
+        "media": 9,
+        "selfhost": 0
+      },
+      "ev": [
+        {
+          "text": "Terminal-Bench 65.8%, tied for first, and first on APEX-SWE at 67.6%.",
+          "source": "TB"
+        },
+        {
+          "text": "First on GDPval-AA (1866); 73.5% on APEX-Agents.",
+          "source": "GDP"
+        },
+        {
+          "text": "Intelligence Index 59 at max effort ($10.04 per task), 57 at extra-high ($6.05).",
+          "source": "AA"
+        },
+        {
+          "text": "Second on BenchLM's coding, agentic and multimodal boards, all Supported.",
+          "source": "BLM"
+        },
+        {
+          "text": "LMArena text rating 1505.",
+          "source": "ARENA"
+        },
+        {
+          "text": "Around 92–97 tokens per second, but about 25 minutes per hard task at max effort because it thinks at length.",
+          "source": "AA"
+        }
+      ]
+    },
+    {
+      "name": "Claude Sonnet 5.5",
+      "maker": "Anthropic",
+      "price": "$2 / $10",
+      "ctx": "1M tokens",
+      "access": "Claude plans; API",
+      "blurb": "Close to Opus on coding at half the list price, and the fastest of the large models.",
+      "s": {
+        "coding": 9,
+        "writing": 8,
+        "reasoning": 8,
+        "speed": 7,
+        "value": 5,
+        "agents": 8,
+        "longdocs": 9,
+        "media": 8,
+        "selfhost": 0
+      },
+      "ev": [
+        {
+          "text": "Terminal-Bench 63.9%; APEX-SWE 66.4%.",
+          "source": "TB"
+        },
+        {
+          "text": "75.5% on APEX-Agents, higher than Opus 5.5 on that board.",
+          "source": "APEX"
+        },
+        {
+          "text": "About 135–140 tokens per second, the fastest output of any large model here.",
+          "source": "AA"
+        },
+        {
+          "text": "Intelligence Index 55 at max effort, but $10.02 per task: it uses so many tokens that it costs about the same per task as Opus.",
+          "source": "AA"
+        },
+        {
+          "text": "Third on BenchLM's coding board (81.41).",
+          "source": "BLM"
+        }
+      ]
+    },
+    {
+      "name": "GPT-6 Astra",
+      "maker": "OpenAI",
+      "price": "$10 / $50",
+      "ctx": "1.05M tokens",
+      "access": "ChatGPT Pro (as GPT-6 Pro); API",
+      "blurb": "OpenAI's heavyweight. Finishes hard tasks faster than the Claude flagships, at the highest list price here.",
+      "s": {
+        "coding": 8,
+        "writing": 7,
+        "reasoning": 9,
+        "speed": 7,
+        "value": 4,
+        "agents": 8,
+        "longdocs": 9,
+        "media": 8,
+        "selfhost": 0
+      },
+      "ev": [
+        {
+          "text": "Intelligence Index 57 at max effort ($6.24 per task), 55 at high ($3.24).",
+          "source": "AA"
+        },
+        {
+          "text": "About 9 minutes per task at high effort. Artificial Analysis says Astra and GPT-6.1 Sol lead on intelligence for the time a task takes.",
+          "source": "AA"
+        },
+        {
+          "text": "Terminal-Bench 60.3% at max effort.",
+          "source": "TB"
+        },
+        {
+          "text": "Fourth overall and third on reasoning at BenchLM.",
+          "source": "BLM"
+        },
+        {
+          "text": "$10 / $50 per million tokens, with cached input at $1.",
+          "source": "PRICE"
+        }
+      ]
+    },
+    {
+      "name": "GPT-6.1 Sol",
+      "maker": "OpenAI",
+      "price": "$2 / $10",
+      "ctx": "1.05M tokens",
+      "access": "ChatGPT Work and Codex; API",
+      "blurb": "The best value at the top end: near-flagship scores for a fraction of the cost per task.",
+      "s": {
+        "coding": 8,
+        "writing": 7,
+        "reasoning": 8,
+        "speed": 7,
+        "value": 10,
+        "agents": 7,
+        "longdocs": 9,
+        "media": 8,
+        "selfhost": 0
+      },
+      "ev": [
+        {
+          "text": "Intelligence Index 55 at max effort for $1.27 per task. Opus 5.5 scores 59 for $10.04.",
+          "source": "AA"
+        },
+        {
+          "text": "Terminal-Bench 60.9%.",
+          "source": "TB"
+        },
+        {
+          "text": "Fifth overall at BenchLM (84.91), and fifth on reasoning.",
+          "source": "BLM"
+        },
+        {
+          "text": "One of the two models leading Artificial Analysis's speed-for-intelligence chart.",
+          "source": "AA"
+        },
+        {
+          "text": "Cached input costs $0.10 per million tokens, a 95% discount.",
+          "source": "PRICE"
+        }
+      ]
+    },
+    {
+      "name": "GPT-6 Luna",
+      "maker": "OpenAI",
+      "price": "$0.10 / $0.50",
+      "ctx": "Not stated by our sources",
+      "access": "API",
+      "blurb": "OpenAI's smallest current model. Built for high-volume, simple jobs, not hard thinking.",
+      "s": {
+        "coding": 4,
+        "writing": 5,
+        "reasoning": 4,
+        "speed": 8,
+        "value": 9,
+        "agents": 3,
+        "longdocs": 5,
+        "media": 5,
+        "selfhost": 0
+      },
+      "ev": [
+        {
+          "text": "$0.10 / $0.50 per million tokens; cached input $0.01.",
+          "source": "PRICE"
+        },
+        {
+          "text": "Among the lowest cost per task on Artificial Analysis at its low effort setting.",
+          "source": "AA"
+        },
+        {
+          "text": "Few independent benchmark results yet, so most of its ratings are estimated from its size and price tier.",
+          "source": null
+        }
+      ]
+    },
+    {
+      "name": "Claude Haiku 5.5",
+      "maker": "Anthropic",
+      "price": "$0.10 / $0.50",
+      "ctx": "1M tokens",
+      "access": "API",
+      "blurb": "Anthropic's small model. The fastest writer here, with a full 1M-token context.",
+      "s": {
+        "coding": 5,
+        "writing": 6,
+        "reasoning": 4,
+        "speed": 10,
+        "value": 9,
+        "agents": 4,
+        "longdocs": 9,
+        "media": 6,
+        "selfhost": 0
+      },
+      "ev": [
+        {
+          "text": "About 191 tokens per second, the fastest output measured for any model in this catalogue.",
+          "source": "AA"
+        },
+        {
+          "text": "Intelligence Index 34 at extra-high effort, for $0.25 per task.",
+          "source": "AA"
+        },
+        {
+          "text": "$0.10 / $0.50 for prompts up to 100K tokens; $0.50 / $2.50 above that. 1M-token context.",
+          "source": "PRICE"
+        }
+      ]
+    },
+    {
+      "name": "Gemini 4 Carbon",
+      "maker": "Google",
+      "price": "$2 / $10, then $4 / $20",
+      "ctx": "1M tokens",
+      "access": "Google AI Ultra; API",
+      "blurb": "Topped the Intelligence Index in early November and leads Mercor's professional-tasks board.",
+      "s": {
+        "coding": 8,
+        "writing": 9,
+        "reasoning": 10,
+        "speed": 5,
+        "value": 6,
+        "agents": 9,
+        "longdocs": 9,
+        "media": 8,
+        "selfhost": 0
+      },
+      "ev": [
+        {
+          "text": "Intelligence Index 60 at high effort, top of the index on November 6; about $7.76 per task.",
+          "source": "AA"
+        },
+        {
+          "text": "84.2% on APEX-Agents, first.",
+          "source": "APEX"
+        },
+        {
+          "text": "LMArena text rating 1526 (preliminary, about 4,500 votes).",
+          "source": "ARENA"
+        },
+        {
+          "text": "Second overall and on reasoning at BenchLM; fourth on coding (Estimated).",
+          "source": "BLM"
+        },
+        {
+          "text": "Not ranked on BenchLM's preliminary multimodal board, so its media rating is estimated from earlier Gemini models' strength with images.",
+          "source": "BLM"
+        },
+        {
+          "text": "$2 / $10 until November 30, 2026, then $4 / $20.",
+          "source": "GEO"
+        }
+      ]
+    },
+    {
+      "name": "Gemini 4 Argon",
+      "maker": "Google",
+      "price": "$2 / $10, then $4 / $20",
+      "ctx": "1M tokens",
+      "access": "Gemini app with Google AI Pro or Ultra; API",
+      "blurb": "The Gemini 4 model most people can get in the app, and one of the most preferred for writing.",
+      "s": {
+        "coding": 7,
+        "writing": 9,
+        "reasoning": 7,
+        "speed": 6,
+        "value": 5,
+        "agents": 9,
+        "longdocs": 9,
+        "media": 8,
+        "selfhost": 0
+      },
+      "ev": [
+        {
+          "text": "LMArena text rating 1523, second.",
+          "source": "ARENA"
+        },
+        {
+          "text": "82.4% on APEX-Agents, second; fourth on BenchLM's agentic board.",
+          "source": "APEX"
+        },
+        {
+          "text": "Intelligence Index 50 at high effort, at about $7.68 per task, which makes it poor value next to GPT-6.1 Sol.",
+          "source": "AA"
+        },
+        {
+          "text": "About 82 tokens per second.",
+          "source": "AA"
+        }
+      ]
+    },
+    {
+      "name": "Gemini 3.8 Flash",
+      "maker": "Google",
+      "price": "$0.75 / $3.75",
+      "ctx": "Not stated by our sources",
+      "access": "API",
+      "blurb": "Google's quick, inexpensive workhorse for everyday jobs.",
+      "s": {
+        "coding": 5,
+        "writing": 6,
+        "reasoning": 5,
+        "speed": 8,
+        "value": 9,
+        "agents": 5,
+        "longdocs": 8,
+        "media": 7,
+        "selfhost": 0
+      },
+      "ev": [
+        {
+          "text": "$0.75 / $3.75 through December 31, 2026, rising to $1.50 / $7.50 on January 1, 2027.",
+          "source": "PRICE"
+        },
+        {
+          "text": "No independent benchmark results in our sources, so its ratings are estimated from its tier.",
+          "source": null
+        }
+      ]
+    },
+    {
+      "name": "Muse Wonder",
+      "maker": "Meta",
+      "price": "$4 / $20",
+      "ctx": "1M tokens",
+      "access": "Meta Model API and Muse Code; no consumer app plan",
+      "blurb": "Meta's frontier model. Well liked for its answers, and mainly for developers so far.",
+      "s": {
+        "coding": 7,
+        "writing": 8,
+        "reasoning": 7,
+        "speed": 5,
+        "value": 5,
+        "agents": 8,
+        "longdocs": 9,
+        "media": 6,
+        "selfhost": 0
+      },
+      "ev": [
+        {
+          "text": "LMArena text rating 1513 (Max version), third.",
+          "source": "ARENA"
+        },
+        {
+          "text": "GDPval-AA 1857 for the Full version, close behind Opus 5.5.",
+          "source": "GDP"
+        },
+        {
+          "text": "Ninth on BenchLM's coding (70.79) and reasoning boards (Full version).",
+          "source": "BLM"
+        },
+        {
+          "text": "Price as listed by LMArena.",
+          "source": "GEO"
+        }
+      ]
+    },
+    {
+      "name": "Grok 4.7",
+      "maker": "xAI",
+      "price": "$2 / $6",
+      "ctx": "500K tokens",
+      "access": "X Premium; API; Cursor",
+      "blurb": "A low list price, but it costs more per finished task than models that score higher.",
+      "s": {
+        "coding": 5,
+        "writing": 6,
+        "reasoning": 5,
+        "speed": 6,
+        "value": 3,
+        "agents": 4,
+        "longdocs": 7,
+        "media": 5,
+        "selfhost": 0
+      },
+      "ev": [
+        {
+          "text": "Intelligence Index 35 at extra-high effort, at $7.77 per task. GPT-6.1 Sol scores 55 for $1.27.",
+          "source": "AA"
+        },
+        {
+          "text": "$2 / $6 for prompts under 200K tokens; $4 / $12 above. Context is 500K tokens, half the others.",
+          "source": "PRICE"
+        }
+      ]
+    },
+    {
+      "name": "Kimi K3.1 Pro",
+      "maker": "Moonshot AI",
+      "price": "Free to download; hosted prices vary",
+      "ctx": "1M tokens",
+      "access": "Download from Hugging Face (custom licence); hosted APIs",
+      "blurb": "The strongest model you can download and run on your own hardware.",
+      "s": {
+        "coding": 8,
+        "writing": 7,
+        "reasoning": 7,
+        "speed": 5,
+        "value": 7,
+        "agents": 7,
+        "longdocs": 9,
+        "media": 4,
+        "selfhost": 10
+      },
+      "ev": [
+        {
+          "text": "Intelligence Index 46, the top open-weight model, at $3.68 per task through hosted APIs.",
+          "source": "AA"
+        },
+        {
+          "text": "Terminal-Bench 65.7%, near the top, but reported by Moonshot itself.",
+          "source": "TB"
+        },
+        {
+          "text": "GDPval-AA 1861, between Opus 5.5 and Muse Wonder.",
+          "source": "GDP"
+        },
+        {
+          "text": "Tenth on BenchLM's agentic board (72.72).",
+          "source": "BLM"
+        },
+        {
+          "text": "The licence is custom. Read it before using Kimi in a commercial product.",
+          "source": null
+        }
+      ]
+    }
+  ],
+  "sources": {
+    "AA": {
+      "name": "Artificial Analysis",
+      "url": "https://artificialanalysis.ai/leaderboards/models",
+      "what": "An independent lab that runs the same set of tests on every model and combines them into one Intelligence Index. It also measures how fast each model writes (output tokens per second), how long a task takes, and what it costs to run each test task.",
+      "used": "Reasoning, Speed, Value",
+      "when": "Leaderboard viewed November 18, 2026; index scores as captured November 6, 2026",
+      "caveat": "Scores depend on the effort setting tested. The same model can score 52 at “high” and 59 at “max”, and cost several times more at the higher setting."
+    },
+    "ARENA": {
+      "name": "LMArena (text arena)",
+      "url": "https://lmarena.ai/leaderboard",
+      "what": "People ask two anonymous models the same question and vote for the answer they prefer. Thousands of votes become an Elo-style rating.",
+      "used": "Writing",
+      "when": "Ratings as captured November 6, 2026",
+      "caveat": "It measures which answer people prefer, not whether it's correct. It's the only broad measure of writing quality available, so the Writing ratings are the softest in this catalogue."
+    },
+    "TB": {
+      "name": "Terminal-Bench",
+      "url": "https://www.tbench.ai/",
+      "what": "Gives a model real tasks in a computer terminal (setting up software, fixing broken builds, data work) and checks whether the job actually got done.",
+      "used": "Coding",
+      "when": "Scores as captured November 6, 2026; Claude Fable 5.2 added November 16",
+      "caveat": "Kimi K3.1 Pro's score was run by its maker, not checked independently."
+    },
+    "APEX": {
+      "name": "Mercor APEX-SWE and APEX-Agents",
+      "url": "https://www.mercor.com/",
+      "what": "Tasks written and graded by working professionals. APEX-SWE covers software engineering; APEX-Agents covers multi-step professional work such as finance and consulting tasks.",
+      "used": "Coding, Long tasks",
+      "when": "Scores as captured November 6, 2026",
+      "caveat": "Not every model has been run on both boards, so some ratings lean on one of them."
+    },
+    "GDP": {
+      "name": "GDPval-AA",
+      "url": "https://artificialanalysis.ai/",
+      "what": "Artificial Analysis's version of OpenAI's GDPval test: realistic work products (reports, spreadsheets, plans) across many occupations, rated against each other.",
+      "used": "Long tasks, Writing",
+      "when": "Scores as captured November 6, 2026",
+      "caveat": "Ratings are relative to the other models tested, so the gaps between them matter more than the raw numbers."
+    },
+    "BLM": {
+      "name": "BenchLM monthly rankings",
+      "url": "https://benchlm.ai/monthly-rankings/2026-11",
+      "what": "Combines results from more than 100 public benchmarks into boards for overall, coding, reasoning, agentic, knowledge and multimodal ability. Each row is labelled “Supported” (enough independent evidence) or “Estimated” (wider uncertainty).",
+      "used": "Coding, Reasoning, Long tasks, Images & media; also a cross-check on everything else",
+      "when": "November 2026 release",
+      "caveat": "Its multimodal board is preliminary because few models have been tested, and several top positions (including Claude Fable 5.2's) are marked Estimated."
+    },
+    "PRICE": {
+      "name": "IntuitionLabs API pricing comparison",
+      "url": "https://intuitionlabs.ai/articles/llm-api-pricing-comparison-2025",
+      "what": "A table of official API prices from OpenAI, Anthropic, Google, xAI and DeepSeek, including cached-input rates and long-prompt surcharges.",
+      "used": "Value, prices shown on each listing",
+      "when": "Prices checked October 10, 2026",
+      "caveat": "Doesn't cover Gemini 4, Claude Fable 5.2 or Kimi; those prices come from GEO Toolbox."
+    },
+    "GEO": {
+      "name": "GEO Toolbox, “Best AI model in November 2026”",
+      "url": "https://geotoolbox.ai/blog/best-ai-model",
+      "what": "A dated roundup that gathers each model's price, context window, which subscription plans include it, and its scores across several leaderboards, all captured on the same day.",
+      "used": "Prices, context windows, where to use each model, and most of the leaderboard figures above",
+      "when": "Published November 6, 2026",
+      "caveat": "A secondary source: it reports other leaderboards rather than running its own tests. We checked several of its figures against the original leaderboards and they matched."
+    }
+  },
+  "basis": [
+    {
+      "category": "coding",
+      "text": "Terminal-Bench and Mercor APEX-SWE, cross-checked with BenchLM's coding board. OpenAI has stopped reporting SWE-bench Verified, so it isn't used.",
+      "trust": 4
+    },
+    {
+      "category": "writing",
+      "text": "LMArena preference ratings, with GDPval-AA as a tie-breaker for work documents. There is no neutral test of writing quality.",
+      "trust": 2
+    },
+    {
+      "category": "reasoning",
+      "text": "Artificial Analysis Intelligence Index, plus BenchLM's reasoning and knowledge boards.",
+      "trust": 4
+    },
+    {
+      "category": "speed",
+      "text": "Artificial Analysis output speed (tokens per second) and time per task. Small models with no measurements are estimated from their tier.",
+      "trust": 3
+    },
+    {
+      "category": "value",
+      "text": "Artificial Analysis cost per test task, compared with the score it buys; list prices for models without a cost-per-task figure.",
+      "trust": 3
+    },
+    {
+      "category": "agents",
+      "text": "Mercor APEX-Agents, GDPval-AA and BenchLM's agentic board.",
+      "trust": 3
+    },
+    {
+      "category": "longdocs",
+      "text": "Published context window size. This says how much a model can take in, not how well it uses it, so trust it less.",
+      "trust": 2
+    },
+    {
+      "category": "media",
+      "text": "BenchLM's multimodal board, which is still preliminary and leaves several models unranked.",
+      "trust": 1
+    },
+    {
+      "category": "selfhost",
+      "text": "Whether the model's weights can be downloaded. Either they can or they can't.",
+      "trust": 4
+    }
+  ]
+}
