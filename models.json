@@ -1,5 +1,5 @@
 {
-  "lastChecked": "2026-11-18",
+  "lastChecked": "2026-11-23",
   "models": [
     {
       "name": "Claude Fable 5.2",
@@ -130,7 +130,7 @@
       "price": "$10 / $50",
       "ctx": "1.05M tokens",
       "access": "ChatGPT Pro (as GPT-6 Pro); API",
-      "blurb": "OpenAI's heavyweight. Finishes hard tasks faster than the Claude flagships, at the highest list price here.",
+      "blurb": "OpenAI's previous heavyweight. Now outscored by GPT-6.2 Astra, which also costs less per token.",
       "s": {
         "coding": 8,
         "writing": 7,
@@ -162,6 +162,43 @@
         {
           "text": "$10 / $50 per million tokens, with cached input at $1.",
           "source": "PRICE"
+        }
+      ]
+    },
+    {
+      "name": "GPT-6.2 Astra",
+      "maker": "OpenAI",
+      "price": "$8 / $40",
+      "ctx": "1.05M tokens",
+      "access": "ChatGPT Work and Codex (Plus, Pro, Enterprise, Edu); API",
+      "blurb": "OpenAI's newest heavyweight, released November 17. Scores higher than GPT-6 Astra for less, but early users found it uneven.",
+      "s": {
+        "coding": 8,
+        "writing": 7,
+        "reasoning": 10,
+        "speed": 7,
+        "value": 5,
+        "agents": 8,
+        "longdocs": 9,
+        "media": 8,
+        "selfhost": 0
+      },
+      "ev": [
+        {
+          "text": "Terminal-Bench 4.1: 62.1% at max effort, sixth, above GPT-6 Astra (60.3%).",
+          "source": "TB"
+        },
+        {
+          "text": "OpenAI reports an Intelligence Index of 62 on Artificial Analysis, second behind Claude Fable 5.2. We couldn't read Artificial Analysis's own page this week.",
+          "source": "OAI"
+        },
+        {
+          "text": "$8 / $40 per million tokens (cached input $0.40) up to 272K-token prompts; longer prompts cost more. 1.05M-token context.",
+          "source": "OAI"
+        },
+        {
+          "text": "Few independent results yet: writing, speed and media ratings are estimated from GPT-6 Astra, and several well-known early testers called it uneven and hard to steer on long projects.",
+          "source": null
         }
       ]
     },
@@ -203,6 +240,43 @@
         {
           "text": "Cached input costs $0.10 per million tokens, a 95% discount.",
           "source": "PRICE"
+        }
+      ]
+    },
+    {
+      "name": "GPT-6.2 Sol",
+      "maker": "OpenAI",
+      "price": "$2 / $10",
+      "ctx": "1.05M tokens",
+      "access": "ChatGPT Work and Codex (Plus, Pro, Enterprise, Edu); API",
+      "blurb": "The November 17 update to Sol, at the same price as GPT-6.1 Sol.",
+      "s": {
+        "coding": 8,
+        "writing": 7,
+        "reasoning": 8,
+        "speed": 7,
+        "value": 9,
+        "agents": 7,
+        "longdocs": 9,
+        "media": 8,
+        "selfhost": 0
+      },
+      "ev": [
+        {
+          "text": "Terminal-Bench 4.1: 61.5% at max effort, seventh, slightly above GPT-6.1 Sol (60.9%).",
+          "source": "TB"
+        },
+        {
+          "text": "$2 / $10 per million tokens with cached input at $0.10, the same as GPT-6.1 Sol, for prompts up to 272K tokens. 1.05M-token context.",
+          "source": "OAI"
+        },
+        {
+          "text": "OpenAI-reported results are mixed against GPT-6.1 Sol: higher on FrontierCode 2.0 (43.8% vs 39.0%), slightly lower on the Vals Science Index (58.5% vs 59.6%).",
+          "source": "OAI"
+        },
+        {
+          "text": "No Artificial Analysis cost-per-task figure checked yet, so its value rating is set from its list price.",
+          "source": null
         }
       ]
     },
@@ -280,7 +354,7 @@
       "access": "Google AI Ultra; API",
       "blurb": "Topped the Intelligence Index in early November and leads Mercor's professional-tasks board.",
       "s": {
-        "coding": 8,
+        "coding": 9,
         "writing": 9,
         "reasoning": 10,
         "speed": 5,
@@ -294,6 +368,10 @@
         {
           "text": "Intelligence Index 60 at high effort, top of the index on November 6; about $7.76 per task.",
           "source": "AA"
+        },
+        {
+          "text": "Terminal-Bench 4.1: 64.5% at high effort, fourth, just above Sonnet 5.5 (63.9%).",
+          "source": "TB"
         },
         {
           "text": "84.2% on APEX-Agents, first.",
@@ -314,6 +392,43 @@
         {
           "text": "$2 / $10 until November 30, 2026, then $4 / $20.",
           "source": "GEO"
+        }
+      ]
+    },
+    {
+      "name": "Gemini 4 Neon",
+      "maker": "Google",
+      "price": "$3 / $15",
+      "ctx": "1M tokens",
+      "access": "Gemini app with Google AI Pro or Ultra; API (paid tier)",
+      "blurb": "Google's new middle model, released November 18: placed between Hydrogen and Carbon, and cheaper than Carbon from December 1.",
+      "s": {
+        "coding": 8,
+        "writing": 8,
+        "reasoning": 9,
+        "speed": 7,
+        "value": 7,
+        "agents": 8,
+        "longdocs": 9,
+        "media": 8,
+        "selfhost": 0
+      },
+      "ev": [
+        {
+          "text": "Terminal-Bench 4.1: 61.2% at extra-high effort on the public board. Google reported 65.2% itself.",
+          "source": "TB"
+        },
+        {
+          "text": "Google reports an Intelligence Index of 61 at extra-high effort, third overall. We couldn't read Artificial Analysis's own page this week.",
+          "source": "GOOG"
+        },
+        {
+          "text": "$3 / $15 per million tokens (cached input $0.15), with a 1M-token context window.",
+          "source": "GOOG"
+        },
+        {
+          "text": "Few independent results yet: writing, speed, agents and media ratings are estimated from the other Gemini 4 models.",
+          "source": null
         }
       ]
     },
@@ -343,6 +458,10 @@
         {
           "text": "82.4% on APEX-Agents, second; fourth on BenchLM's agentic board.",
           "source": "APEX"
+        },
+        {
+          "text": "Terminal-Bench 4.1: 55.5% at high effort.",
+          "source": "TB"
         },
         {
           "text": "Intelligence Index 50 at high effort, at about $7.68 per task, which makes it poor value next to GPT-6.1 Sol.",
@@ -391,7 +510,7 @@
       "access": "Meta Model API and Muse Code; no consumer app plan",
       "blurb": "Meta's frontier model. Well liked for its answers, and mainly for developers so far.",
       "s": {
-        "coding": 7,
+        "coding": 6,
         "writing": 8,
         "reasoning": 7,
         "speed": 5,
@@ -409,6 +528,10 @@
         {
           "text": "GDPval-AA 1857 for the Full version, close behind Opus 5.5.",
           "source": "GDP"
+        },
+        {
+          "text": "Terminal-Bench 4.1: 47.0% at extra-high effort, well behind Gemini 4 Argon (55.5%) and Kimi K3.1 Pro (59.7%).",
+          "source": "TB"
         },
         {
           "text": "Ninth on BenchLM's coding (70.79) and reasoning boards (Full version).",
@@ -444,6 +567,10 @@
           "source": "AA"
         },
         {
+          "text": "Terminal-Bench 4.1: 38.8% at extra-high effort.",
+          "source": "TB"
+        },
+        {
           "text": "$2 / $6 for prompts under 200K tokens; $4 / $12 above. Context is 500K tokens, half the others.",
           "source": "PRICE"
         }
@@ -473,7 +600,7 @@
           "source": "AA"
         },
         {
-          "text": "Terminal-Bench 65.7%, near the top, but reported by Moonshot itself.",
+          "text": "Terminal-Bench 4.1: 59.7% on the public board (run with Claude Code), lower than the 65.7% Moonshot reported itself.",
           "source": "TB"
         },
         {
@@ -513,8 +640,8 @@
       "url": "https://www.tbench.ai/",
       "what": "Gives a model real tasks in a computer terminal (setting up software, fixing broken builds, data work) and checks whether the job actually got done.",
       "used": "Coding",
-      "when": "Scores as captured November 6, 2026; Claude Fable 5.2 added November 16",
-      "caveat": "Kimi K3.1 Pro's score was run by its maker, not checked independently."
+      "when": "Terminal-Bench 4.1 board, read November 23, 2026",
+      "caveat": "Each entry pairs a model with an agent (Claude Code, Codex and so on), so the agent affects the score. Makers' own figures can differ from the board: Moonshot reported 65.7% for Kimi K3.1 Pro, the board shows 59.7%."
     },
     "APEX": {
       "name": "Mercor APEX-SWE and APEX-Agents",
@@ -555,6 +682,22 @@
       "used": "Prices, context windows, where to use each model, and most of the leaderboard figures above",
       "when": "Published November 6, 2026",
       "caveat": "A secondary source: it reports other leaderboards rather than running its own tests. We checked several of its figures against the original leaderboards and they matched."
+    },
+    "OAI": {
+      "name": "OpenAI announcement: GPT-6.2 Astra and Sol",
+      "url": "https://community.openai.com/t/gpt-6-2-astra-and-sol-are-now-available/1417531",
+      "what": "OpenAI's own launch post for GPT-6.2 Astra and GPT-6.2 Sol, with prices, where each model is available and OpenAI's benchmark results.",
+      "used": "Prices, access and maker-reported scores for the GPT-6.2 models",
+      "when": "Posted November 17, 2026; read November 23, 2026",
+      "caveat": "The maker's own announcement, so its benchmark figures are OpenAI-reported. The 1.05M-token context figure comes from VentureBeat's report of OpenAI's model docs."
+    },
+    "GOOG": {
+      "name": "Google blog: Introducing Gemini 4 Neon",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/",
+      "what": "Google's own launch post for Gemini 4 Neon, with its price, context window, where it's available and Google's benchmark results.",
+      "used": "Price, context, access and maker-reported scores for Gemini 4 Neon",
+      "when": "Published November 18, 2026; read November 23, 2026",
+      "caveat": "The maker's own announcement, so every benchmark figure in it is Google-reported."
     }
   },
   "basis": [
